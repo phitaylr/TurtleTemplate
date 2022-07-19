@@ -12,7 +12,6 @@ class Turtle {
   int state = 0;
   float percentOnState = 0;
 
-
   Turtle() {
 
     sprite = loadImage("turtle.png");
