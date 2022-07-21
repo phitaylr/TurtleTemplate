@@ -19,6 +19,7 @@ void setup() {
 
 void draw() {
   if (key != 'r')
+  background(255);
     t.display();
 }
 

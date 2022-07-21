@@ -6,17 +6,29 @@ class Turtle {
   boolean penDn;
   int strokeWidth;
   PImage sprite;
-  PVector position, direction;
+  PVector position, direction, origpos;
   int speed;
   ArrayList<String> commands;
   int state = 0;
   float percentOnState = 0;
+  boolean showTurtle = true;
 
   Turtle() {
 
     sprite = loadImage("turtle.png");
+    origpos = new PVector(width/2, height/2);
     initGraphics();
     speed=20;
+    commands = new ArrayList<>();
+  }
+
+  Turtle(PVector p) {
+
+    sprite = loadImage("turtle.png");
+    origpos = p.copy();
+    initGraphics();
+    speed=20;
+
     commands = new ArrayList<>();
   }
 
@@ -36,11 +48,10 @@ class Turtle {
   }
 
   void initGraphics() {
-    background(255);
     penColor = color(0, 0, 255);
     penDn = true;
     strokeWidth = 1;
-    position = new PVector(width/2, height/2);
+    position = origpos.copy();
     direction = new PVector(1, 0);
   }
 
@@ -52,12 +63,8 @@ class Turtle {
     commands.add("forward " + d);
   }
 
+
   void display() {
-    if (state >= commands.size()) {
-      reset();
-      return;
-    }
-    //println(commands + " " + state + " " + percentOnState);
     initGraphics();
 
     for (int i = 0; i <= state; i++) {
@@ -90,17 +97,23 @@ class Turtle {
       } else if (cmd.contains("penup")) {
         penDn = false;
         if (i==state) state++;
-      }else if (cmd.contains("pendn")) {
+      } else if (cmd.contains("pendn")) {
         penDn = true;
         if (i==state) state++;
-      }
+      } else if (cmd.contains("hideTurtle")) {
+        showTurtle = false;
+        if (i==state) state++;
+      }else if (cmd.contains("showTurtle")) {
+        showTurtle = true;
+        if (i==state) state++;
+      }else{}
     }
 
     if (percentOnState >= 1) {
       percentOnState = 0;
       state++;
     }
-    displaySprite();
+    if (showTurtle) displaySprite();
   }
 
   void turn_draw(float theta) {
@@ -118,7 +131,13 @@ class Turtle {
     }
   }
 
-
+  void hideTurtle() {
+    commands.add("hideTurtle");
+  }
+  
+   void showTurtle() {
+    commands.add("showTurtle");
+  }
 
   void setPenColor(color c) {
     commands.add("pencolor " + c);
