@@ -1,3 +1,7 @@
+// Turtle.java
+// By Philip Taylor
+// Trinity Valley School
+
 Turtle t;
 int maxd = 0;
 int inframe=0;

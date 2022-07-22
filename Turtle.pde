@@ -1,3 +1,8 @@
+// Turtle.java
+// By Philip Taylor
+// Trinity Valley School
+
+
 import java.util.ArrayList;
 
 class Turtle {
