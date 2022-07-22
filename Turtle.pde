@@ -59,7 +59,7 @@ class Turtle {
     commands.add("turn " + theta);
   }
 
-  void forward(int d) {
+  void forward(float d) {
     commands.add("forward " + d);
   }
 
@@ -73,7 +73,7 @@ class Turtle {
         cmd = commands.get(i);
       }
       catch(Exception e) {
-        displaySprite();
+        if (showTurtle) displaySprite();
         return;
       }
       //all commands
@@ -81,7 +81,7 @@ class Turtle {
         turn_draw(Float.parseFloat(cmd.split(" ")[1]));
         if (i==state) state++;
       } else if (cmd.contains("forward")) {
-        int d = Integer.parseInt(cmd.split(" ")[1]);
+        float d = Float.parseFloat(cmd.split(" ")[1]);
         if (i < state) {
           forward_draw(d, 1);
         } else {
@@ -120,7 +120,7 @@ class Turtle {
     direction.rotate(theta);
   }
 
-  void forward_draw(int d, float perc) {
+  void forward_draw(float d, float perc) {
     PVector oldpos = position.copy();
     position.add(direction.copy().mult(d*perc));
 
