@@ -13,7 +13,7 @@ public class Turtle{
    private int strokeWidth;
    private PImage sprite;
    private PVector position, direction, origpos;
-   private int speed;
+   public int speed;
    private ArrayList<String> commands;
    private int state = 0;
    private float percentOnState = 0;
